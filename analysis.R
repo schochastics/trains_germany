@@ -25,14 +25,7 @@ left_join(trips,select(stations_ger,extId,lon,lat),by=c("extID"="extId")) %>%
   facet_wrap(~minswitches,nrow=1)+
   labs(title="switches required to get to Berlin via train")
 
-left_join(trips,select(stations_ger,extId,lon,lat),by=c("extID"="extId")) %>% 
-  distinct() %>% 
-  ggplot(aes(lon,lat))+geom_hex(aes(fill=factor(minswitches)))
 
-left_join(trips,select(stations_ger,extId,lon,lat),by=c("extID"="extId")) %>% 
-  distinct() %>% 
-  ggplot(aes(lon,lat))+geom_point(aes(col=minduration))+
-  scale_color_gradient(low="green",high="red",na.value = "green")
 trips %>% 
   group_by(minswitches) %>% 
   count() %>% 
